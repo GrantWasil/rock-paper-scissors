@@ -1,44 +1,32 @@
-<html>
+<html lang="en">
 <head>
-<script>
-let playerScore;
-let computerScore;
-
-    game();
-
-    function game() {
-        while (playerScore < 3 || computerScore < 3){
-            var playerInput = prompt("Rock, Paper, or Scissors?").toLowerCase();
-            var computerInput = computerPlay().toLowerCase;
-            switch(playRound(playerInput,computerInput)) {
-                case 0:
-                    break;
-                case 1: 
-                    computerScore += 1;
-                    break;
-                case 2:
-                    playerScore += 1;
-                    break;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rock Paper Scissors"</title>
+    <script>
+        //variables
+        const choices = ['rock', 'paper', 'scissors'];
+        let playersChoice;
+        let computersChoice;
+        let playersScore;
+        let computersScore;
+        //initiate the game
+        game();
+        function game() {
+            //reset the game first
+            resetGame();
+            //play till score of 5
+            while(computersScore !== 5 && playersScore !== 5){
+                playersChoice = prompt("Rock, paper or scissors?").toLowerCase();
+                computersChoice = computerPlay();
+                playRound(playersChoice, computersChoice);
+            }
+            //show the final score
+            let result = (computersScore > playersScore) ? "You have lost!" : "You have won!";
+            console.info(result + " The final score is: Computer - " + computersScore + ", You - " + playersScore);
         }
-    }
-}
-
-function computerPlay () {
-    var result = Math.floor(Math.random() * 3) + 1;
-    switch(result) {
-        case 1:
-            return "Rock";
-            break;
-        case 2: 
-            return "Paper";
-            break;
-        case 3: 
-            return "Scissors";
-            break;
-    }
-}
-
-function playRound(playersChoice, computersChoice){
+        function playRound(playersChoice, computersChoice){
             if(playersChoice == "rock"){
                 switch(computersChoice){
                     case "rock":
@@ -91,8 +79,17 @@ function playRound(playersChoice, computersChoice){
                 }
             }
         }
-
-
-</script>
+        function computerPlay(){
+            return choices[Math.floor(choices.length * Math.random())];
+        }
+        function resetGame() {
+            //reset the scores
+            playersScore = 0;
+            computersScore = 0;
+        }
+    </script>
 </head>
+<body>
+    <p>Rock or Paper or Scissors?</p>
+</body>
 </html>
