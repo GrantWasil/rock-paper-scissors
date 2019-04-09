@@ -1,9 +1,27 @@
 <html>
 <head>
 <script>
-
+let playerScore;
+let computerScore;
 
     game();
+
+    function game() {
+        while (playerScore < 3 || computerScore < 3){
+            var playerInput = prompt("Rock, Paper, or Scissors?").toLowerCase();
+            var computerInput = computerPlay().toLowerCase;
+            switch(playRound(playerInput,computerInput)) {
+                case 0:
+                    break;
+                case 1: 
+                    computerScore += 1;
+                    break;
+                case 2:
+                    playerScore += 1;
+                    break;
+        }
+    }
+}
 
 function computerPlay () {
     var result = Math.floor(Math.random() * 3) + 1;
@@ -20,77 +38,61 @@ function computerPlay () {
     }
 }
 
-function playRound(playerChoice, computerChoice) {
-    if (playerChoice == "rock") {
-        switch(computerChoice) {
-            case "rock":
-                console.log("You tie! You both picked rock");
-                return 0; 
-                break;
-            case "paper":
-                console.log("You lose! Paper beats rock");
-                return 1; 
-                break;
-            case "scissors": 
-                console.log("You win! Rock beats scissors");
-                return 2; 
-                break;
+function playRound(playersChoice, computersChoice){
+            if(playersChoice == "rock"){
+                switch(computersChoice){
+                    case "rock":
+                    console.log("It's a draw!");
+                    break;
+                    case "paper":
+                    console.log("Paper beats Rock. You lose!");
+                    computersScore++;
+                    break;
+                    case "scissors":
+                    console.log("Rock beats Scissors. You win!");
+                    playersScore++;
+                    break;
+                    default:
+                    console.info("Something went wrong! 1");
+                } 
+            }
+            else if(playersChoice == "paper") {
+                switch(computersChoice){
+                    case "rock":
+                    console.log("Paper beats Rock. You win!");
+                    playersScore++;
+                    break;
+                    case "paper":
+                    console.log("It's a draw!");
+                    break;
+                    case "scissors":
+                    console.log("Scissors beat Paper. You lose!");
+                    computersScore++;
+                    break;
+                    default:
+                    console.info("Something went wrong! 2")     
+                }
+            }
+            else {
+                switch(computersChoice){
+                    case "rock":
+                    console.log("Rock beats Scissors. You lose!");
+                    computersScore++;
+                    break;
+                    case "paper":
+                    console.log("Scissors beat Paper. You win!");
+                    playersScore++;
+                    break;
+                    case "scissors":
+                    console.log("It's a draw!");
+                    break;
+                    default:
+                    console.info("Something went wrong! 3")   
+                }
+            }
         }
-    }
-    else if (playerChoice == "paper") {
-        switch(computerChoice) {
-            case "rock":
-                console.log("You win! Paper beats rock");
-                return 2; 
-                break;
-            case "paper":
-                console.log("You tie! You both picked paper");
-                return 0; 
-                break;
-            case "scissors": 
-                console.log("You lose! Scissors beats paper");
-                return 1; 
-                break;
-        }
-    }
-    else if (playerChoice == "scissors") {
-        switch(computerChoice) {
-            case "rock":
-                console.log("You lose! Rock beats scissors");
-                return 1; 
-                break;
-            case "paper":
-                console.log("You win! Scissors beats paper");
-                return 2; 
-                break;
-            case "scissors": 
-                console.log("You tie! You both picked scissors");
-                return 0; 
-                break;
-        }
-    }
-}
-
-function game() {
-    var playerScore, computerScore = 0; 
-    while (playerScore < 3 || computerScore < 3){
-        var playerInput = prompt("Rock, Paper, or Scissors?").toLowerCase();
-        var computerInput = computerPlay().toLowerCase;
-        switch(playRound(playerInput,computerInput)) {
-            case 0:
-                break;
-            case 1: 
-                computerScore += 1;
-                break;
-            case 2:
-                playerScore += 1;
-                break;
-        }
-    }
-    
 
 
-}
 </script>
 </head>
 </html>
