@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <title>Rock Paper Scissors"</title>
     <script>
         //variables
@@ -12,15 +13,16 @@
         let playersScore;
         let computersScore;
         //initiate the game
-        game();
-        function game() {
+
+        function game(playersChoice) {
             //reset the game first
             resetGame();
             //play till score of 5
             while(computersScore !== 5 && playersScore !== 5){
-                playersChoice = prompt("Rock, paper or scissors?").toLowerCase();
                 computersChoice = computerPlay();
                 playRound(playersChoice, computersChoice);
+                document.getElementById('player').innerHTML = playersScore;
+                document.getElementById('computer').innerHTML = computersScore;
             }
             //show the final score
             let result = (computersScore > playersScore) ? "You have lost!" : "You have won!";
@@ -90,6 +92,16 @@
     </script>
 </head>
 <body>
-    <p>Rock or Paper or Scissors?</p>
+    <div class="main">
+        <div class="header">
+            <h1>Player: <div id="player">0</div></h1>
+            <h1>Computer: <div id="computer">0</div></h1>
+        </div>
+        <div class="options">
+            <button onclick="game(rock)" class="select" id="rock">Rock</button>
+            <button onclick="game(paper)" class="select" id="paper">Paper</button>
+            <button onclick="game(scissors)" class="select" id="scissors">Scissors</button>
+        </div>
+    </div>
 </body>
 </html>
