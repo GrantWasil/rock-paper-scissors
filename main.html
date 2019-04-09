@@ -1,1 +1,96 @@
-<script></script>
+<html>
+<head>
+<script>
+
+
+    game();
+
+function computerPlay () {
+    var result = Math.floor(Math.random() * 3) + 1;
+    switch(result) {
+        case 1:
+            return "Rock";
+            break;
+        case 2: 
+            return "Paper";
+            break;
+        case 3: 
+            return "Scissors";
+            break;
+    }
+}
+
+function playRound(playerChoice, computerChoice) {
+    if (playerChoice == "rock") {
+        switch(computerChoice) {
+            case "rock":
+                console.log("You tie! You both picked rock");
+                return 0; 
+                break;
+            case "paper":
+                console.log("You lose! Paper beats rock");
+                return 1; 
+                break;
+            case "scissors": 
+                console.log("You win! Rock beats scissors");
+                return 2; 
+                break;
+        }
+    }
+    else if (playerChoice == "paper") {
+        switch(computerChoice) {
+            case "rock":
+                console.log("You win! Paper beats rock");
+                return 2; 
+                break;
+            case "paper":
+                console.log("You tie! You both picked paper");
+                return 0; 
+                break;
+            case "scissors": 
+                console.log("You lose! Scissors beats paper");
+                return 1; 
+                break;
+        }
+    }
+    else if (playerChoice == "scissors") {
+        switch(computerChoice) {
+            case "rock":
+                console.log("You lose! Rock beats scissors");
+                return 1; 
+                break;
+            case "paper":
+                console.log("You win! Scissors beats paper");
+                return 2; 
+                break;
+            case "scissors": 
+                console.log("You tie! You both picked scissors");
+                return 0; 
+                break;
+        }
+    }
+}
+
+function game() {
+    var playerScore, computerScore = 0; 
+    while (playerScore < 3 || computerScore < 3){
+        var playerInput = prompt("Rock, Paper, or Scissors?").toLowerCase();
+        var computerInput = computerPlay().toLowerCase;
+        switch(playRound(playerInput,computerInput)) {
+            case 0:
+                break;
+            case 1: 
+                computerScore += 1;
+                break;
+            case 2:
+                playerScore += 1;
+                break;
+        }
+    }
+    
+
+
+}
+</script>
+</head>
+</html>
