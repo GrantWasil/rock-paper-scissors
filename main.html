@@ -10,74 +10,83 @@
         const choices = ['rock', 'paper', 'scissors'];
         let playersChoice;
         let computersChoice;
-        let playersScore;
-        let computersScore;
+        let playersScore = 0;
+        let computersScore = 0;
         //initiate the game
 
         function game(playersChoice) {
             //reset the game first
-            resetGame();
             //play till score of 5
-            while(computersScore !== 5 && playersScore !== 5){
+            if(computersScore !== 5 && playersScore !== 5){
                 computersChoice = computerPlay();
                 playRound(playersChoice, computersChoice);
                 document.getElementById('player').innerHTML = playersScore;
                 document.getElementById('computer').innerHTML = computersScore;
-            }
+            } else {
             //show the final score
-            let result = (computersScore > playersScore) ? "You have lost!" : "You have won!";
-            console.info(result + " The final score is: Computer - " + computersScore + ", You - " + playersScore);
+                let result = (computersScore > playersScore) ? "You have lost!" : "You have won!";
+                document.getElementById('events').innerHTML = (result + " The final score is - Computer: " + computersScore + ", You: " + playersScore);
+                resetGame();
+                document.getElementById('player').innerHTML = playersScore;
+                document.getElementById('computer').innerHTML = computersScore;
+                }
         }
         function playRound(playersChoice, computersChoice){
             if(playersChoice == "rock"){
                 switch(computersChoice){
                     case "rock":
-                    console.log("It's a draw!");
+                    document.getElementById('events').innerHTML = ("It's a draw!");
                     break;
                     case "paper":
-                    console.log("Paper beats Rock. You lose!");
+                    lose();
+                    document.getElementById('events').innerHTML = ("The Computer's Paper beats Rock. You lose!");
                     computersScore++;
                     break;
                     case "scissors":
-                    console.log("Rock beats Scissors. You win!");
+                    win();
+                    document.getElementById('events').innerHTML = ("Your Rock beats Scissors. You win!");
                     playersScore++;
                     break;
                     default:
-                    console.info("Something went wrong! 1");
+                    document.getElementById('events').innerHTML = ("Something went wrong! 1");
                 } 
             }
             else if(playersChoice == "paper") {
                 switch(computersChoice){
                     case "rock":
-                    console.log("Paper beats Rock. You win!");
+                    win();
+                    document.getElementById('events').innerHTML = ("Your Paper beats Rock. You win!");
                     playersScore++;
                     break;
                     case "paper":
-                    console.log("It's a draw!");
+                    document.getElementById('events').innerHTML = ("It's a draw!");
                     break;
                     case "scissors":
-                    console.log("Scissors beat Paper. You lose!");
+                    lose();
+                    document.getElementById('events').innerHTML = ("The Computer's Scissors beat Paper. You lose!");
                     computersScore++;
                     break;
                     default:
-                    console.info("Something went wrong! 2")     
+                    document.getElementById('events').innerHTML = ("Something went wrong! 2")     
                 }
             }
             else {
                 switch(computersChoice){
                     case "rock":
-                    console.log("Rock beats Scissors. You lose!");
+                    lose();
+                    document.getElementById('events').innerHTML = ("The Computer's Rock beats Scissors. You lose!");
                     computersScore++;
                     break;
                     case "paper":
-                    console.log("Scissors beat Paper. You win!");
+                    win();
+                    document.getElementById('events').innerHTML = ("Your Scissors beat Paper. You win!");
                     playersScore++;
                     break;
                     case "scissors":
-                    console.log("It's a draw!");
+                    document.getElementById('events').innerHTML = ("It's a draw!");
                     break;
                     default:
-                    console.info("Something went wrong! 3")   
+                    document.getElementById('events').innerHTML = ("Something went wrong! 3")   
                 }
             }
         }
@@ -89,18 +98,32 @@
             playersScore = 0;
             computersScore = 0;
         }
+
+        function lose() {
+            setTimeout(function() {document.body.style.backgroundColor = "#ff7f7f"}, 0);
+            setTimeout(function() {document.body.style.backgroundColor = "#e5e5e5"}, 1000);
+        }
+
+        function win() {
+            setTimeout(function() {document.body.style.backgroundColor = "#7fbf7f"}, 0);
+            setTimeout(function() {document.body.style.backgroundColor = "#e5e5e5"}, 1000);
+        }
     </script>
 </head>
 <body>
     <div class="main">
         <div class="header">
             <h1>Player: <div id="player">0</div></h1>
+            <h1 id="title">Rock, Paper, Scissors!</h1>
             <h1>Computer: <div id="computer">0</div></h1>
         </div>
+        <div class="log">
+            <p id="events">Good Luck!</p>
+        </div>
         <div class="options">
-            <button onclick="game(rock)" class="select" id="rock">Rock</button>
-            <button onclick="game(paper)" class="select" id="paper">Paper</button>
-            <button onclick="game(scissors)" class="select" id="scissors">Scissors</button>
+            <button onclick="game('rock')" class="select" id="rock">Rock</button>
+            <button onclick="game('paper')" class="select" id="paper">Paper</button>
+            <button onclick="game('scissors')" class="select" id="scissors">Scissors</button>
         </div>
     </div>
 </body>
